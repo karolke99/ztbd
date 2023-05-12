@@ -22,3 +22,8 @@ Connect using mongosh in the container
 docker exec -it ztbd_mongodb_1 mongosh -u user -p pass --authenticationDatabase admin
 ```commandline
 
+## Cassandra
+Connecting using cqlsh in the container
+```commandline
+docker exec -it ztbd_cassandra_1 cqlsh
+```

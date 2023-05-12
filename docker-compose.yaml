@@ -23,7 +23,15 @@ services:
     volumes:
       - mongodata:/data/db
 
+  cassandra:
+    image: cassandra:4.1.1
+    ports:
+      - '9042:9042'
+    volumes:
+      - cassandradb:/var/lib/cassandra/data
+
 volumes:
+  cassandradb:
   mongodata:
   potgresdata:
     driver: local
