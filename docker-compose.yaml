@@ -1,18 +1,17 @@
 version: '3'
 
 services:
-  postgres:
-    image: postgres:15.2
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    ports:
-      - '5432:5432'
-    volumes:
-      - potgresdata:/var/lib/postgresql/data
+  # postgres:
+  #   image: postgres:15.2
+  #   restart: always
+  #   environment:
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #   ports:
+  #     - '5432:5432'
+  #   volumes:
+  #     - potgresdata:/var/lib/postgresql/data
 
-      
   mongodb:
     image: mongodb/mongodb-community-server:6.0-ubi8
     environment:
@@ -23,16 +22,16 @@ services:
     volumes:
       - mongodata:/data/db
 
-  cassandra:
-    image: cassandra:4.1.1
-    ports:
-      - '9042:9042'
-    volumes:
-      - cassandradb:/var/lib/cassandra/data
+  # cassandra:
+  #   image: cassandra:4.1.1
+  #   ports:
+  #     - '9042:9042'
+  #   volumes:
+  #     - cassandradb:/var/lib/cassandra/data
 
 volumes:
-  cassandradb:
+  # cassandradb:
   mongodata:
-  potgresdata:
-    driver: local
+  # potgresdata:
+    # driver: local
     

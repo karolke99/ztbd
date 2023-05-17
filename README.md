@@ -27,3 +27,9 @@ Connecting using cqlsh in the container
 ```commandline
 docker exec -it ztbd_cassandra_1 cqlsh
 ```
+
+
+
+- Tworzymy managera baz danych dla każdego systemu. Manager ma zawierać metody CRUD (Create, Read, Update, Delete), AVG, ME, len(słowa w tabeli)
+- Każda metoda przyjmuje jako parametr liczbę, która albo generuje wiersze do wstawienia albo do pobrania
+- Metody z managera zwracają czas wykonywanych operacji

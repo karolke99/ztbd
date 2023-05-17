@@ -14,17 +14,17 @@ def mongoimport(csv_path, collection_name):
     return collection.count_documents({})
 
 
-print(f'Importing mubi_lists_data.csv ...')
-print(mongoimport('./archive/mubi_lists_data.csv', 'lists_data'))
+# print(f'Importing mubi_lists_data.csv ...')
+# print(mongoimport('./archive/mubi_lists_data.csv', 'lists_data'))
 
-print('Importing mubi_lists_user_data.csv ...')
-print(mongoimport('./archive/mubi_lists_user_data.csv', 'lists_user_data'))
+# print('Importing mubi_lists_user_data.csv ...')
+# print(mongoimport('./archive/mubi_lists_user_data.csv', 'lists_user_data'))
 
-print('Importing mubi_movie_data.csv ...')
-print(mongoimport('./archive/mubi_movie_data.csv', 'movie_data'))
+# print('Importing mubi_movie_data.csv ...')
+# print(mongoimport('./archive/mubi_movie_data.csv', 'movie_data'))
 
-print('Importing mubi_ratings_data.csv ...')
-print(mongoimport('./archive/mubi_ratings_data.csv', 'ratings_data'))
+# print('Importing mubi_ratings_data.csv ...')
+# print(mongoimport('./archive/mubi_ratings_data.csv', 'ratings_data'))
 
-print('Importing mubi_ratings_user_data.csv ...')
-print(mongoimport('./archive/mubi_ratings_user_data.csv', 'ratings_user_data'))
+# print('Importing mubi_ratings_user_data.csv ...')
+# print(mongoimport('./archive/mubi_ratings_user_data.csv', 'ratings_user_data'))
