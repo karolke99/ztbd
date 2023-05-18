@@ -15,7 +15,7 @@ class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
 
-        self.title("Algorytm genetyczny")
+        self.title("Database performance test")
         self.geometry(f"{600}x{400}")
 
         self.grid_columnconfigure((0, 1), weight=1)
