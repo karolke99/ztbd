@@ -2,6 +2,7 @@ import tkinter
 import tkinter.messagebox
 import customtkinter
 from postgres_manager import PostgresManager
+from mongo_manager import MongoManager
 import matplotlib.pyplot as plt
 
 customtkinter.set_appearance_mode("dark")  # Modes: "System" (standard), "Dark", "Light"
@@ -11,6 +12,7 @@ customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "gre
 class App(customtkinter.CTk):
     # configuration = Configuration()
     postgres_manager = PostgresManager()
+    mongo_manager = MongoManager()
 
     def __init__(self):
         super().__init__()
@@ -157,89 +159,89 @@ class App(customtkinter.CTk):
     def run_insert(self):
         # todo
         self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.insert(int(self.insert_size_var.get()))))
-        self.mongo_textbox.insert('2.0', '0.0')
+        self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.insert(int(self.insert_size_var.get()))))
         self.cassandra_textbox.insert('3.0', '0.0')
 
     def run_insert_plot(self):
         # todo
         postgres = [self.postgres_manager.insert(i) for i in [1, 5, 10]]
-        mongo = [1, 5, 10]
+        mongo = [self.mongo_manager.insert(i) for i in [1, 5, 10]]
         cassandra = [1, 5, 10]
         self.generate_plot("InsertExecutionTime.png", [1, 5, 10], postgres, cassandra, mongo)
 
     def run_select(self):
         # todo
         self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.select(int(self.select_size_var.get()))))
-        self.mongo_textbox.insert('2.0', '0.0')
+        self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.select(int(self.select_size_var.get()))))
         self.cassandra_textbox.insert('3.0', '0.0')
 
     def run_select_plot(self):
         # todo
         postgres = [self.postgres_manager.select(i) for i in [1, 5, 10]]
-        mongo = [1, 5, 10]
+        mongo = [self.mongo_manager.select(i) for i in [1, 5, 10]]
         cassandra = [1, 5, 10]
         self.generate_plot("SelectExecutionTime.png", [1, 5, 10], postgres, cassandra, mongo)
 
     def run_update(self):
         # todo
         self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.update(int(self.update_size_var.get()))))
-        self.mongo_textbox.insert('2.0', '0.0')
+        self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.update(int(self.update_size_var.get()))))
         self.cassandra_textbox.insert('3.0', '0.0')
 
     def run_update_plot(self):
         # todo
         postgres = [self.postgres_manager.update(i) for i in [1, 5, 10]]
-        mongo = [1, 5, 10]
+        mongo = [self.mongo_manager.update(i) for i in [1, 5, 10]]
         cassandra = [1, 5, 10]
         self.generate_plot("UpdateExecutionTime.png", [1, 5, 10], postgres, cassandra, mongo)
 
     def run_delete(self):
         # todo
-        self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.update(int(self.delete_size_var.get()))))
-        self.mongo_textbox.insert('2.0', '0.0')
+        self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.delete(int(self.delete_size_var.get()))))
+        self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.delete(int(self.delete_size_var.get()))))
         self.cassandra_textbox.insert('3.0', '0.0')
 
     def run_delete_plot(self):
         # todo
         postgres = [self.postgres_manager.delete(i) for i in [1, 5, 10]]
-        mongo = [1, 5, 10]
+        mongo = [self.mongo_manager.delete(i) for i in [1, 5, 10]]
         cassandra = [1, 5, 10]
         self.generate_plot("DeleteExecutionTime.png", [1, 5, 10], postgres, cassandra, mongo)
 
     def run_avg(self):
         # todo
         self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.avg()))
-        self.mongo_textbox.insert('2.0', '0.0')
+        self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.avg()))
         self.cassandra_textbox.insert('3.0', '0.0')
 
     def run_median(self):
         # todo
         self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.median()))
-        self.mongo_textbox.insert('2.0', '0.0')
+        self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.median()))
         self.cassandra_textbox.insert('3.0', '0.0')
 
     def run_count_all(self):
          # todo
         self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.count()))
-        self.mongo_textbox.insert('2.0', '0.0')
+        self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.count()))
         self.cassandra_textbox.insert('3.0', '0.0')
 
     def run_count_by_world(self):
          # todo
         self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.count_by_word()))
-        self.mongo_textbox.insert('2.0', '0.0')
+        self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.count_by_word()))
         self.cassandra_textbox.insert('3.0', '0.0')
 
     def run_min(self):
          # todo
         self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.min()))
-        self.mongo_textbox.insert('2.0', '0.0')
+        self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.min()))
         self.cassandra_textbox.insert('3.0', '0.0')
 
     def run_max(self):
          # todo
         self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.max()))
-        self.mongo_textbox.insert('2.0', '0.0')
+        self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.max()))
         self.cassandra_textbox.insert('3.0', '0.0')
 
     def generate_plot(self, filename, x, postgres, cassandra, mongo):
