@@ -93,14 +93,3 @@ class CassandraManager:
     # def count_by_word(self):
     #     query = f"SELECT tokenCount(tokenize(critic, ' ')) AS word_count FROM ratings_data;"
     #     return self._execute(query)
-
-manager = CassandraManager()
-print(f'select: {manager.select(5000)}')
-print(f'insert: {manager.insert(5000)}')
-print(f'update: {manager.update(5000)}')
-print(f'delete: {manager.delete(5000)}')
-print(f'avg: {manager.avg()}')
-print(f'median: {manager.median()}')
-print(f'count: {manager.count()}')
-print(f'min: {manager.min()}')
-print(f'max: {manager.max()}')

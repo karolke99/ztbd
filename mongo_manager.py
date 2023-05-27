@@ -101,17 +101,3 @@ class MongoManager:
 
     def __del__(self):
         self._client.close()
-
-
-# manager = MongoManager()
-#
-# print(f'select: {manager.select(100)}')
-# print(f'insert: {manager.insert()}')
-# print(f'update: {manager.update()}')
-# print(f'delete: {manager.delete()}')
-# print(f'avg: {manager.avg()}')
-# print(f'median: {manager.median()}')
-# print(f'count: {manager.count()}')
-# print(f'min: {manager.min()}')
-# print(f'max: {manager.max()}')
-# print(f'count_by_word: {manager.count_by_word()}')

@@ -30,7 +30,7 @@ class App(customtkinter.CTk):
         self.frame.grid(row=0, column=0, sticky="nesw")
         self.insert_size_label = customtkinter.CTkLabel(master=self.frame, text="Insert")
         self.insert_size_label.grid(row=0, column=1, padx=10, pady=5)
-        self.insert_size_var = tkinter.StringVar(value='0')
+        self.insert_size_var = tkinter.StringVar(value='1')
         self.insert_size_entry = customtkinter.CTkEntry(self.frame, textvariable=self.insert_size_var)
         self.insert_size_entry.grid(row=0, column=2, padx=10, pady=5)
         self.insert_button = customtkinter.CTkButton(master=self.frame, fg_color="transparent",
@@ -45,7 +45,7 @@ class App(customtkinter.CTk):
         # select
         self.select_size_label = customtkinter.CTkLabel(master=self.frame, text="Select")
         self.select_size_label.grid(row=1, column=1, padx=10, pady=5)
-        self.select_size_var = tkinter.StringVar(value='0')
+        self.select_size_var = tkinter.StringVar(value='1')
         self.select_size_entry = customtkinter.CTkEntry(self.frame, textvariable=self.select_size_var)
         self.select_size_entry.grid(row=1, column=2, padx=10, pady=5)
         self.select_button = customtkinter.CTkButton(master=self.frame, fg_color="transparent",
@@ -60,7 +60,7 @@ class App(customtkinter.CTk):
         # update
         self.update_size_label = customtkinter.CTkLabel(master=self.frame, text="Update")
         self.update_size_label.grid(row=2, column=1, padx=10, pady=5)
-        self.update_size_var = tkinter.StringVar(value='0')
+        self.update_size_var = tkinter.StringVar(value='1')
         self.update_size_entry = customtkinter.CTkEntry(self.frame, textvariable=self.update_size_var)
         self.update_size_entry.grid(row=2, column=2, padx=10, pady=5)
         self.update_button = customtkinter.CTkButton(master=self.frame, fg_color="transparent",
@@ -75,7 +75,7 @@ class App(customtkinter.CTk):
         # delete
         self.delete_size_label = customtkinter.CTkLabel(master=self.frame, text="Delete")
         self.delete_size_label.grid(row=3, column=1, padx=10, pady=5)
-        self.delete_size_var = tkinter.StringVar(value='0')
+        self.delete_size_var = tkinter.StringVar(value='1')
         self.delete_size_entry = customtkinter.CTkEntry(self.frame, textvariable=self.delete_size_var)
         self.delete_size_entry.grid(row=3, column=2, padx=10, pady=5)
         self.delete_button = customtkinter.CTkButton(master=self.frame, fg_color="transparent",
@@ -153,78 +153,92 @@ class App(customtkinter.CTk):
         self.cassandra_textbox.grid(row=9, column=4, padx=10, pady=5)
 
     def run_insert(self):
+        self.clear_textbox()
         self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.insert(int(self.insert_size_var.get()))))
         self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.insert(int(self.insert_size_var.get()))))
         self.cassandra_textbox.insert('3.0', text=str(self.cassandra_manager.insert(int(self.insert_size_var.get()))))
 
     def run_insert_plot(self):
+        self.clear_textbox()
         postgres = [self.postgres_manager.insert(i) for i in [1, 5, 10]]
         mongo = [self.mongo_manager.insert(i) for i in [1, 5, 10]]
         cassandra = [self.cassandra_manager.insert(i) for i in [1, 5, 10]]
         self.generate_plot("InsertExecutionTime.png", [1, 5, 10], postgres, cassandra, mongo)
 
     def run_select(self):
+        self.clear_textbox()
         self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.select(int(self.select_size_var.get()))))
         self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.select(int(self.select_size_var.get()))))
-        self.cassandra_textbox.insert('3.0', '0.0')
+        self.cassandra_textbox.insert('3.0', text=str(self.cassandra_manager.select(int(self.select_size_var.get()))))
 
     def run_select_plot(self):
+        self.clear_textbox()
         postgres = [self.postgres_manager.select(i) for i in [1, 5, 10]]
         mongo = [self.mongo_manager.select(i) for i in [1, 5, 10]]
         cassandra = [1, 5, 10]
         self.generate_plot("SelectExecutionTime.png", [1, 5, 10], postgres, cassandra, mongo)
 
     def run_update(self):
+        self.clear_textbox()
         self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.update(int(self.update_size_var.get()))))
         self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.update(int(self.update_size_var.get()))))
         self.cassandra_textbox.insert('3.0', text=str(self.cassandra_manager.update(int(self.update_size_var.get()))))
 
     def run_update_plot(self):
+        self.clear_textbox()
         postgres = [self.postgres_manager.update(i) for i in [1, 5, 10]]
         mongo = [self.mongo_manager.update(i) for i in [1, 5, 10]]
         cassandra = [self.cassandra_manager.update(i) for i in [1, 5, 10]]
         self.generate_plot("UpdateExecutionTime.png", [1, 5, 10], postgres, cassandra, mongo)
 
     def run_delete(self):
+        self.clear_textbox()
         self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.delete(int(self.delete_size_var.get()))))
         self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.delete(int(self.delete_size_var.get()))))
         self.cassandra_textbox.insert('3.0', text=str(self.cassandra_manager.delete(int(self.delete_size_var.get()))))
 
     def run_delete_plot(self):
+        self.clear_textbox()
         postgres = [self.postgres_manager.delete(i) for i in [1, 5, 10]]
         mongo = [self.mongo_manager.delete(i) for i in [1, 5, 10]]
         cassandra = [1, 5, 10]
         self.generate_plot("DeleteExecutionTime.png", [1, 5, 10], postgres, cassandra, mongo)
 
     def run_avg(self):
+        self.clear_textbox()
         self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.avg()))
         self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.avg()))
         self.cassandra_textbox.insert('3.0', text=str(self.cassandra_manager.avg()))
 
     def run_median(self):
+        self.clear_textbox()
         self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.median()))
         self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.median()))
         self.cassandra_textbox.insert('3.0', text=str(self.cassandra_manager.median()))
 
     def run_count_all(self):
+        self.clear_textbox()
         self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.count()))
         self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.count()))
-        self.cassandra_textbox.insert('3.0', '0.0')
+        self.cassandra_textbox.insert('3.0', text=str(self.cassandra_manager.count()))
 
     def run_count_by_world(self):
+        self.clear_textbox()
         self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.count_by_word()))
         self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.count_by_word()))
-        self.cassandra_textbox.insert('3.0', '0.0')
+        self.cassandra_textbox.insert('3.0', 'Unavailable')
 
     def run_min(self):
+        self.clear_textbox()
         self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.min()))
         self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.min()))
-        self.cassandra_textbox.insert('3.0', '0.0')
+        self.cassandra_textbox.insert('3.0', text=str(self.cassandra_manager.min()))
 
     def run_max(self):
+        self.clear_textbox()
         self.postgres_textbox.insert('1.0', text=str(self.postgres_manager.max()))
         self.mongo_textbox.insert('2.0', text=str(self.mongo_manager.max()))
-        self.cassandra_textbox.insert('3.0', '0.0')
+        self.cassandra_textbox.insert('3.0', text=str(self.cassandra_manager.max()))
 
     def generate_plot(self, filename, x, postgres, cassandra, mongo):
         print(postgres)
@@ -232,12 +246,17 @@ class App(customtkinter.CTk):
         plt.plot(x, cassandra, label='Cassandra')
         plt.plot(x, mongo, label='MongoDB')
 
-        plt.title('filename')
+        plt.title(f'{filename}')
         plt.xlabel('Number of rows')
         plt.ylabel('Execution time')
         plt.legend()
 
         plt.savefig(filename)
+
+    def clear_textbox(self):
+        self.postgres_textbox.delete(1.0, tkinter.END)
+        self.mongo_textbox.delete(1.0, tkinter.END)
+        self.cassandra_textbox.delete(1.0, tkinter.END)
 
 
 if __name__ == "__main__":
