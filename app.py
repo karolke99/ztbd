@@ -160,10 +160,10 @@ class App(customtkinter.CTk):
 
     def run_insert_plot(self):
         self.clear_textbox()
-        postgres = [self.postgres_manager.insert(i) for i in [1, 5, 10]]
-        mongo = [self.mongo_manager.insert(i) for i in [1, 5, 10]]
-        cassandra = [self.cassandra_manager.insert(i) for i in [1, 5, 10]]
-        self.generate_plot("InsertExecutionTime.png", [1, 5, 10], postgres, cassandra, mongo)
+        postgres = [self.postgres_manager.insert(i) for i in range(1, 100, 5)]
+        mongo = [self.mongo_manager.insert(i) for i in range(1, 100, 5)]
+        cassandra = [self.cassandra_manager.insert(i) for i in range(1, 100, 5)]
+        self.generate_plot("InsertExecutionTime.png", range(1, 100, 5), postgres, cassandra, mongo)
 
     def run_select(self):
         self.clear_textbox()
@@ -173,10 +173,10 @@ class App(customtkinter.CTk):
 
     def run_select_plot(self):
         self.clear_textbox()
-        postgres = [self.postgres_manager.select(i) for i in [1, 5, 10]]
-        mongo = [self.mongo_manager.select(i) for i in [1, 5, 10]]
-        cassandra = [1, 5, 10]
-        self.generate_plot("SelectExecutionTime.png", [1, 5, 10], postgres, cassandra, mongo)
+        postgres = [self.postgres_manager.select(i) for i in range(1, 100, 5)]
+        mongo = [self.mongo_manager.select(i) for i in range(1, 100, 5)]
+        cassandra = [self.cassandra_manager.select(i) for i in range(1, 100, 5)]
+        self.generate_plot("SelectExecutionTime.png", range(1, 100, 5), postgres, cassandra, mongo)
 
     def run_update(self):
         self.clear_textbox()
@@ -186,10 +186,10 @@ class App(customtkinter.CTk):
 
     def run_update_plot(self):
         self.clear_textbox()
-        postgres = [self.postgres_manager.update(i) for i in [1, 5, 10]]
-        mongo = [self.mongo_manager.update(i) for i in [1, 5, 10]]
-        cassandra = [self.cassandra_manager.update(i) for i in [1, 5, 10]]
-        self.generate_plot("UpdateExecutionTime.png", [1, 5, 10], postgres, cassandra, mongo)
+        postgres = [self.postgres_manager.update(i) for i in range(1, 100, 5)]
+        mongo = [self.mongo_manager.update(i) for i in range(1, 100, 5)]
+        cassandra = [self.cassandra_manager.update(i) for i in range(1, 100, 5)]
+        self.generate_plot("UpdateExecutionTime.png", range(1, 100, 5), postgres, cassandra, mongo)
 
     def run_delete(self):
         self.clear_textbox()
@@ -199,10 +199,10 @@ class App(customtkinter.CTk):
 
     def run_delete_plot(self):
         self.clear_textbox()
-        postgres = [self.postgres_manager.delete(i) for i in [1, 5, 10]]
-        mongo = [self.mongo_manager.delete(i) for i in [1, 5, 10]]
-        cassandra = [1, 5, 10]
-        self.generate_plot("DeleteExecutionTime.png", [1, 5, 10], postgres, cassandra, mongo)
+        postgres = [self.postgres_manager.delete(i) for i in range(1, 100, 5)]
+        mongo = [self.mongo_manager.delete(i) for i in range(1, 100, 5)]
+        cassandra = [self.cassandra_manager.delete(i) for i in range(1, 100, 5)]
+        self.generate_plot("DeleteExecutionTime.png", range(1, 100, 5), postgres, cassandra, mongo)
 
     def run_avg(self):
         self.clear_textbox()
@@ -246,7 +246,7 @@ class App(customtkinter.CTk):
         plt.plot(x, cassandra, label='Cassandra')
         plt.plot(x, mongo, label='MongoDB')
 
-        plt.title(f'{filename}')
+        plt.title(f'{filename[:-4]}')
         plt.xlabel('Number of rows')
         plt.ylabel('Execution time')
         plt.legend()
